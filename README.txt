@@ -29,3 +29,5 @@ Credits:
 	Other:
 		jQuery (jquery.com)
 		Responsive Tools (github.com/ajlkn/responsive-tools)
+
+		Photo by <a href="https://unsplash.com/@saarteaga?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Sergio Arteaga</a> on <a href="https://unsplash.com/photos/a-group-of-boats-floating-on-top-of-a-large-body-of-water-bcvjduEL9Lo?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
