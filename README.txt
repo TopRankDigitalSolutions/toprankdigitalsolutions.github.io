@@ -29,5 +29,4 @@ Credits:
 	Other:
 		jQuery (jquery.com)
 		Responsive Tools (github.com/ajlkn/responsive-tools)
-
 		Photo by Sergio Arteaga on https://unsplash.com/photos/a-group-of-boats-floating-on-top-of-a-large-body-of-water-bcvjduEL9Lo
