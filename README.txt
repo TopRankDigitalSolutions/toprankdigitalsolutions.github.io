@@ -1,32 +1,19 @@
-TXT by HTML5 UP
-html5up.net | @ajlkn
-Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+TopRank Digital Solutions
+=========================
 
+Static website for https://toprankdigitalsolutions.com/.
 
-A new, fully responsive portfolio/business style website template. I've been experimenting
-with minimalist styles lately and this design is one of many in the works that exemplifies
-this new direction. Hope you enjoy it.
+The site is intentionally framework-free and deploys through GitHub Pages.
+Core production files:
 
-Demo images* courtesy of Unsplash, a radtastic collection of CC0 (public domain) images
-you can use for pretty much whatever.
+- index.html — homepage content, metadata, structured data, and analytics
+- 404.html — branded missing-page fallback
+- assets/css/main.css — responsive visual system
+- tests/site-smoke.sh — repeatable content and deployment checks
 
-(* = Not included)
+Run the smoke checks from the repository root:
 
-Feedback, bug reports, and comments are not only welcome, but strongly encouraged :)
+    tests/site-smoke.sh
 
-AJ
-aj@lkn.io | @ajlkn
-
-
-Credits:
-
-	Demo Images:
-		Unsplash (unsplash.com)
-
-	Icons:
-		Font Awesome (fontawesome.io)
-
-	Other:
-		jQuery (jquery.com)
-		Responsive Tools (github.com/ajlkn/responsive-tools)
-		Photo by Sergio Arteaga on https://unsplash.com/photos/a-group-of-boats-floating-on-top-of-a-large-body-of-water-bcvjduEL9Lo
+For local review, serve the repository with any static HTTP server and verify
+the homepage and 404 page at mobile, tablet, and desktop widths.
