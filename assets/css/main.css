@@ -416,8 +416,8 @@ h3 { margin: 0; font-size: 21px; line-height: 1.25; letter-spacing: -0.025em; }
 .experience-list { border-top: 1px solid var(--line); }
 .experience-row {
     display: grid;
-    grid-template-columns: 48px minmax(220px, 0.65fr) minmax(280px, 1fr) auto;
-    align-items: center;
+    grid-template-columns: 44px minmax(260px, 0.9fr) minmax(340px, 1.2fr) 120px;
+    align-items: start;
     gap: 30px;
     padding: 28px 12px;
     border-bottom: 1px solid var(--line);
@@ -425,7 +425,7 @@ h3 { margin: 0; font-size: 21px; line-height: 1.25; letter-spacing: -0.025em; }
 .experience-number { margin: 0; color: rgba(82, 226, 255, 0.42); font: 700 12px/1 var(--font-mono); }
 .experience-row h3 { margin-top: 7px; }
 .experience-row > p:nth-child(3) { margin: 0; color: var(--muted); font-size: 14px; }
-.tag { padding: 8px 10px; border: 1px solid var(--line); border-radius: 4px; color: var(--cyan); font: 700 9px/1 var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; }
+.tag { justify-self: start; padding: 8px 10px; border: 1px solid var(--line); border-radius: 4px; color: var(--cyan); font: 700 9px/1 var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; }
 
 .approach-section { position: relative; overflow: hidden; background: radial-gradient(circle at 15% 60%, rgba(26, 124, 255, 0.1), transparent 35rem); }
 .approach-intro .button { margin-top: 28px; }
