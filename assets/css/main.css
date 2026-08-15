@@ -396,7 +396,7 @@ h3 { margin: 0; font-size: 21px; line-height: 1.25; letter-spacing: -0.025em; }
 .node-icon i:nth-child(4) { bottom: 11px; left: 27px; }
 
 .service-card h3 { margin-bottom: 14px; }
-.service-card > p { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.75; }
+.service-card > p { min-height: 7em; margin: 0; color: var(--muted); font-size: 14px; line-height: 1.75; }
 .service-card ul { margin: 28px 0 0; padding: 20px 0 0; border-top: 1px solid var(--line); list-style: none; }
 .service-card li { position: relative; padding-left: 15px; color: var(--muted-strong); font-size: 12px; line-height: 2; }
 .service-card li::before { content: "+"; position: absolute; left: 0; color: var(--cyan); font-family: var(--font-mono); }
@@ -488,6 +488,7 @@ h3 { margin: 0; font-size: 21px; line-height: 1.25; letter-spacing: -0.025em; }
     .section-heading { margin-bottom: 42px; }
     .service-grid { grid-template-columns: 1fr; }
     .service-card { min-height: 0; }
+    .service-card > p { min-height: 0; }
     .service-icon { margin-top: 36px; }
     .experience-row { grid-template-columns: 32px 1fr; gap: 12px 18px; padding-block: 24px; }
     .experience-row > p:nth-child(3), .experience-row .tag { grid-column: 2; }
