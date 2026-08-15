@@ -6,7 +6,7 @@ repo_root=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
 home="$repo_root/index.html"
 not_found="$repo_root/404.html"
 privacy="$repo_root/privacy.html"
-expected_calendly="https://calendly.com/jpruiz114/30min"
+expected_calendly="https://calendly.com/jpruiz114/new-meeting"
 
 fail() {
   printf 'FAIL: %s\n' "$1" >&2
