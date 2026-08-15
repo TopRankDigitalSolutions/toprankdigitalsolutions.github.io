@@ -6,10 +6,10 @@ Static website for https://toprankdigitalsolutions.com/.
 The site is intentionally framework-free and deploys through GitHub Pages.
 Core production files:
 
-- index.html — homepage content, metadata, structured data, and analytics
-- 404.html — branded missing-page fallback
-- assets/css/main.css — responsive visual system
-- tests/site-smoke.sh — repeatable content and deployment checks
+- index.html: homepage content, metadata, structured data, and analytics
+- 404.html: branded missing-page fallback
+- assets/css/main.css: responsive visual system
+- tests/site-smoke.sh: repeatable content and deployment checks
 
 Run the smoke checks from the repository root:
 
