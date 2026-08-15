@@ -448,7 +448,25 @@ h3 { margin: 0; font-size: 21px; line-height: 1.25; letter-spacing: -0.025em; }
 .site-footer { border-top: 1px solid var(--line); padding-block: 30px; background: #01040b; }
 .footer-inner { display: flex; align-items: center; gap: 30px; }
 .footer-inner p { margin: 0; color: var(--muted); font-size: 11px; }
-.footer-inner p:last-child { margin-left: auto; }
+.footer-copyright { margin-left: auto; }
+.footer-link { color: var(--muted-strong); font-size: 11px; text-underline-offset: 4px; }
+.footer-link:hover { color: var(--cyan); }
+
+.legal-main { min-height: calc(100svh - 137px); }
+.legal-hero { position: relative; overflow: hidden; padding-block: clamp(80px, 12vw, 140px) clamp(54px, 8vw, 90px); border-bottom: 1px solid var(--line); }
+.legal-hero::after { content: ""; position: absolute; top: -16rem; right: -12rem; width: 38rem; aspect-ratio: 1; border: 1px solid var(--line); border-radius: 50%; box-shadow: 0 0 100px rgba(25, 125, 255, 0.1); }
+.legal-hero-content { position: relative; z-index: 1; max-width: 820px; }
+.legal-hero h1 { font-size: clamp(52px, 8vw, 88px); }
+.legal-summary { max-width: 700px; margin: 26px 0 0; color: var(--muted-strong); font-size: 18px; }
+.legal-updated { margin: 28px 0 0; color: var(--cyan); font: 700 10px/1.4 var(--font-mono); letter-spacing: 0.1em; text-transform: uppercase; }
+.legal-content { max-width: 820px; padding-block: clamp(64px, 9vw, 110px); }
+.legal-section + .legal-section { margin-top: 52px; padding-top: 52px; border-top: 1px solid var(--line); }
+.legal-section h2 { margin-bottom: 18px; font-size: clamp(28px, 4vw, 40px); }
+.legal-section p, .legal-section li { color: var(--muted-strong); }
+.legal-section p { margin: 0 0 16px; }
+.legal-section ul { margin: 18px 0 0; padding-left: 22px; }
+.legal-section li + li { margin-top: 10px; }
+.legal-section a { color: var(--cyan); text-underline-offset: 4px; }
 
 .not-found { min-height: 100svh; display: grid; place-items: center; overflow: hidden; position: relative; }
 .not-found-content { position: relative; z-index: 2; max-width: 760px; padding-block: 80px; text-align: center; }
@@ -495,7 +513,8 @@ h3 { margin: 0; font-size: 21px; line-height: 1.25; letter-spacing: -0.025em; }
     .consultation-expectations { flex-direction: column; align-items: stretch; max-width: 360px; margin-inline: auto; }
     .consultation-expectations li { justify-content: center; }
     .footer-inner { flex-wrap: wrap; }
-    .footer-inner p:last-child { width: 100%; margin-left: 0; }
+    .footer-copyright { width: 100%; margin-left: 0; }
+    .legal-hero { padding-top: 64px; }
 }
 
 @media (max-width: 420px) {

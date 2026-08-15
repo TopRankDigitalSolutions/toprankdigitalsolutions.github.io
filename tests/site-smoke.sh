@@ -5,6 +5,7 @@ set -eu
 repo_root=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
 home="$repo_root/index.html"
 not_found="$repo_root/404.html"
+privacy="$repo_root/privacy.html"
 expected_calendly="https://calendly.com/jpruiz114/30min"
 
 fail() {
@@ -17,7 +18,7 @@ require_text() {
   rg -Fq "$text" "$file" || fail "missing '$text' in ${file#"$repo_root/"}"
 }
 
-for file in "$home" "$not_found" "$repo_root/CNAME" "$repo_root/robots.txt" "$repo_root/sitemap.xml"; do
+for file in "$home" "$not_found" "$privacy" "$repo_root/CNAME" "$repo_root/robots.txt" "$repo_root/sitemap.xml"; do
   [ -f "$file" ] || fail "missing ${file#"$repo_root/"}"
 done
 
@@ -33,7 +34,12 @@ require_text "$home" "Project delivery"
 require_text "$home" "Ongoing partnership"
 require_text "$home" "rel=\"canonical\""
 require_text "$home" "href=\"#main-content\""
+require_text "$home" "href=\"/privacy.html\""
 require_text "$not_found" "href=\"/\""
+require_text "$privacy" "https://toprankdigitalsolutions.com/privacy.html"
+require_text "$privacy" "Google Analytics"
+require_text "$privacy" "Calendly"
+require_text "$privacy" "privacy@toprankdigitalsolutions.com"
 
 python3 - "$home" "$expected_calendly" <<'PY'
 import json
@@ -131,7 +137,78 @@ if set(organization.get("knowsAbout", [])) != expected_services:
     fail("Organization JSON-LD must list the four approved service names")
 PY
 
-if rg -qi 'etsy|nrcc|pacer|client logos?|our clients|clients who trust' "$home" "$not_found"; then
+python3 - "$privacy" "$repo_root/sitemap.xml" <<'PY'
+import sys
+import xml.etree.ElementTree as ET
+from html.parser import HTMLParser
+
+privacy_path, sitemap_path = sys.argv[1:]
+expected_url = "https://toprankdigitalsolutions.com/privacy.html"
+
+
+def fail(message):
+    raise SystemExit(f"FAIL: {message}")
+
+
+class PrivacyParser(HTMLParser):
+    def __init__(self):
+        super().__init__()
+        self.anchors = []
+        self.canonical = None
+        self.description = None
+        self.title = []
+        self._in_title = False
+
+    def handle_starttag(self, tag, attrs):
+        attributes = dict(attrs)
+        if tag == "a":
+            self.anchors.append(attributes.get("href", ""))
+        elif tag == "link" and "canonical" in attributes.get("rel", "").split():
+            self.canonical = attributes.get("href")
+        elif tag == "meta" and attributes.get("name", "").lower() == "description":
+            self.description = attributes.get("content")
+        elif tag == "title":
+            self._in_title = True
+
+    def handle_data(self, data):
+        if self._in_title:
+            self.title.append(data)
+
+    def handle_endtag(self, tag):
+        if tag == "title":
+            self._in_title = False
+
+
+parser = PrivacyParser()
+with open(privacy_path, encoding="utf-8") as privacy_page:
+    privacy_html = privacy_page.read()
+    parser.feed(privacy_html)
+
+if parser.canonical != expected_url:
+    fail("privacy canonical URL is missing or incorrect")
+if "Privacy Policy" not in "".join(parser.title):
+    fail("privacy page title is missing or incorrect")
+if not parser.description:
+    fail("privacy meta description is missing")
+if "/privacy.html" not in parser.anchors:
+    fail("privacy footer link is missing")
+if "mailto:privacy@toprankdigitalsolutions.com" not in parser.anchors:
+    fail("privacy contact link is missing")
+for provider in ("Google Analytics", "Cloudflare", "GitHub Pages", "Calendly"):
+    if provider not in privacy_html:
+        fail(f"privacy page is missing provider disclosure: {provider}")
+
+root = ET.parse(sitemap_path).getroot()
+namespace = {"sitemap": "http://www.sitemaps.org/schemas/sitemap/0.9"}
+locations = {
+    element.text
+    for element in root.findall("sitemap:url/sitemap:loc", namespace)
+}
+if expected_url not in locations:
+    fail("privacy URL is missing from parsed sitemap entries")
+PY
+
+if rg -qi 'etsy|nrcc|pacer|client logos?|our clients|clients who trust' "$home" "$not_found" "$privacy"; then
   fail "found a forbidden organization or direct-client implication"
 fi
 
@@ -139,20 +216,21 @@ if rg -qi 'digital marketing|lead generation' "$home"; then
   fail "legacy positioning remains in the homepage"
 fi
 
-if rg -q 'jquery|dropotron|scrolly|breakpoints\.min|browser\.min|util\.js|calendly-inline-widget' "$home" "$not_found"; then
+if rg -q 'jquery|dropotron|scrolly|breakpoints\.min|browser\.min|util\.js|calendly-inline-widget' "$home" "$not_found" "$privacy"; then
   fail "legacy scripts or embedded Calendly markup remain"
 fi
 
-if rg -q 'user-scalable=no' "$home" "$not_found"; then
+if rg -q 'user-scalable=no' "$home" "$not_found" "$privacy"; then
   fail "viewport prevents user scaling"
 fi
 
-if rg -q 'fontawesome|webfonts|pic05\.jpg|banner\.jpg' "$home" "$not_found" "$repo_root/assets/css/main.css"; then
+if rg -q 'fontawesome|webfonts|pic05\.jpg|banner\.jpg' "$home" "$not_found" "$privacy" "$repo_root/assets/css/main.css"; then
   fail "retired visual assets remain referenced"
 fi
 
 require_text "$repo_root/CNAME" "toprankdigitalsolutions.com"
 require_text "$repo_root/robots.txt" "https://toprankdigitalsolutions.com/sitemap.xml"
 require_text "$repo_root/sitemap.xml" "https://toprankdigitalsolutions.com/"
+require_text "$repo_root/sitemap.xml" "https://toprankdigitalsolutions.com/privacy.html"
 
 printf 'Site smoke checks passed.\n'
