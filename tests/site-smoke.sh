@@ -6,6 +6,8 @@ repo_root=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
 home="$repo_root/index.html"
 not_found="$repo_root/404.html"
 privacy="$repo_root/privacy.html"
+favicon="$repo_root/favicon.svg"
+security_txt="$repo_root/.well-known/security.txt"
 expected_calendly="https://calendly.com/jpruiz114/new-meeting"
 
 fail() {
@@ -18,7 +20,7 @@ require_text() {
   rg -Fq "$text" "$file" || fail "missing '$text' in ${file#"$repo_root/"}"
 }
 
-for file in "$home" "$not_found" "$privacy" "$repo_root/CNAME" "$repo_root/robots.txt" "$repo_root/sitemap.xml"; do
+for file in "$home" "$not_found" "$privacy" "$favicon" "$security_txt" "$repo_root/CNAME" "$repo_root/robots.txt" "$repo_root/sitemap.xml"; do
   [ -f "$file" ] || fail "missing ${file#"$repo_root/"}"
 done
 
@@ -35,6 +37,14 @@ require_text "$home" "Ongoing partnership"
 require_text "$home" "rel=\"canonical\""
 require_text "$home" "href=\"#main-content\""
 require_text "$home" "href=\"/privacy.html\""
+for page in "$home" "$not_found" "$privacy"; do
+  require_text "$page" "rel=\"icon\" href=\"/favicon.svg\" type=\"image/svg+xml\""
+done
+require_text "$favicon" "viewBox=\"0 0 64 64\""
+require_text "$security_txt" "Contact: mailto:security@toprankdigitalsolutions.com"
+require_text "$security_txt" "Expires: 2027-08-14T00:00:00Z"
+require_text "$security_txt" "Preferred-Languages: en"
+require_text "$security_txt" "Canonical: https://toprankdigitalsolutions.com/.well-known/security.txt"
 require_text "$not_found" "href=\"/\""
 require_text "$privacy" "https://toprankdigitalsolutions.com/privacy.html"
 require_text "$privacy" "Google Analytics"

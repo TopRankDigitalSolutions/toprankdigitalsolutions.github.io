@@ -1,0 +1,4 @@
+Contact: mailto:security@toprankdigitalsolutions.com
+Expires: 2027-08-14T00:00:00Z
+Preferred-Languages: en
+Canonical: https://toprankdigitalsolutions.com/.well-known/security.txt

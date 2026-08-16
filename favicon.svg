@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="TopRank Digital Solutions">
+  <rect width="64" height="64" rx="14" fill="#030713"/>
+  <path d="M8 17h27v7H25v26h-7V24H8z" fill="#f5f8ff"/>
+  <path d="M31 17v33m0-29h8c6 0 9 3 9 8s-3 8-9 8h-8m9 0 9 13" fill="none" stroke="#f5f8ff" stroke-width="7" stroke-linejoin="round"/>
+  <path d="M48 37h5l-5 13h-5zm8 0h5l-5 13h-5z" fill="#1ca1ff"/>
+</svg>
