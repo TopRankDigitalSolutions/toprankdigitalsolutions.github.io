@@ -20,7 +20,7 @@ require_text() {
   rg -Fq "$text" "$file" || fail "missing '$text' in ${file#"$repo_root/"}"
 }
 
-for file in "$home" "$not_found" "$privacy" "$favicon" "$security_txt" "$repo_root/CNAME" "$repo_root/robots.txt" "$repo_root/sitemap.xml"; do
+for file in "$home" "$not_found" "$privacy" "$favicon" "$security_txt" "$repo_root/.nojekyll" "$repo_root/CNAME" "$repo_root/robots.txt" "$repo_root/sitemap.xml"; do
   [ -f "$file" ] || fail "missing ${file#"$repo_root/"}"
 done
 
