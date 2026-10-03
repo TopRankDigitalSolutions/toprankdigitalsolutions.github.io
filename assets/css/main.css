@@ -445,6 +445,17 @@ h3 { margin: 0; font-size: 21px; line-height: 1.25; letter-spacing: -0.025em; }
 .consultation-expectations li { display: flex; align-items: center; gap: 8px; padding: 10px 14px; border: 1px solid var(--line); border-radius: 5px; color: var(--muted); font-size: 11px; }
 .consultation-expectations span { color: var(--cyan); font-family: var(--font-mono); }
 
+.contracting-details { margin: 0; border-top: 1px solid var(--line); }
+.contracting-details > div { display: grid; grid-template-columns: minmax(180px, 0.45fr) minmax(0, 1fr); gap: 12px 32px; align-items: baseline; padding: 20px 0; border-bottom: 1px solid var(--line); }
+.contracting-details dt { color: var(--muted); font: 700 11px/1.5 var(--font-mono); text-transform: uppercase; letter-spacing: 0.08em; }
+.contracting-details dd { margin: 0; color: var(--ink); font-size: 18px; overflow-wrap: anywhere; }
+.contracting-note { margin-top: 24px; color: var(--muted); font-size: 13px; }
+.contracting-note a { color: var(--cyan); text-underline-offset: 4px; }
+.contracting-contact { display: flex; flex-wrap: wrap; align-items: center; gap: 24px; margin-top: 40px; padding-top: 32px; border-top: 1px solid var(--line); }
+.contracting-contact > div { flex: 1 1 320px; }
+.contracting-contact p { max-width: 620px; margin: 12px 0 0; color: var(--muted); }
+.contracting-contact .button { white-space: normal; }
+
 .site-footer { border-top: 1px solid var(--line); padding-block: 30px; background: #01040b; }
 .footer-inner { display: flex; align-items: center; gap: 30px; }
 .footer-inner p { margin: 0; color: var(--muted); font-size: 11px; }
@@ -515,6 +526,7 @@ h3 { margin: 0; font-size: 21px; line-height: 1.25; letter-spacing: -0.025em; }
     .footer-inner { flex-wrap: wrap; }
     .footer-copyright { width: 100%; margin-left: 0; }
     .legal-hero { padding-top: 64px; }
+    .contracting-details > div { grid-template-columns: 1fr; gap: 8px; }
 }
 
 @media (max-width: 420px) {
